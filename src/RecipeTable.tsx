@@ -1,16 +1,13 @@
 import React from 'react';
 import { DataRow } from './App';
 
-function RecipeTable({ selectedRecipe, totals, percentages, onRemove, onUpdateServingSize}: any) {
-  const handleRemoveClick = (index: number) => {
-    // Call the onRemove function with the index of the item to remove
-    onRemove(index);
-  };
-
-  const handleServingSizeChange = (index: number, newValue: number) => {
-    onUpdateServingSize(index, newValue);
-  };
-
+function RecipeTable({
+  selectedRecipe,
+  totals,
+  percentages,
+  onRemove,
+  onUpdateServingSize,
+}: any) {
   return (
     <div>
       <table>
@@ -32,7 +29,9 @@ function RecipeTable({ selectedRecipe, totals, percentages, onRemove, onUpdateSe
                 <input
                   type="number"
                   value={item.servingsize}
-                  onChange={(e) => handleServingSizeChange(index, Number(e.target.value))}
+                  onChange={(e) =>
+                    onUpdateServingSize(index, Number(e.target.value))
+                  }
                 />
               </td>
               <td>{item.protein.toFixed(2)}</td>
@@ -40,7 +39,7 @@ function RecipeTable({ selectedRecipe, totals, percentages, onRemove, onUpdateSe
               <td>{item.carb.toFixed(2)}</td>
               <td>{item.fiber.toFixed(2)}</td>
               <td>
-                <button onClick={() => handleRemoveClick(index)}>Remove</button>
+                <button onClick={() => onRemove(index)}>Remove</button>
               </td>
             </tr>
           ))}
@@ -56,6 +55,6 @@ function RecipeTable({ selectedRecipe, totals, percentages, onRemove, onUpdateSe
       </table>
     </div>
   );
-};
+}
 
 export default RecipeTable;

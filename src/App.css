@@ -37,7 +37,8 @@
   }
 }
 
-#target, #recipe {
+#target,
+#recipe {
   display: inline-block;
   vertical-align: top;
 }

@@ -1,9 +1,8 @@
 import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import React from 'react';
+import { COLORS } from './App';
 
-function RecipeMacrosChart ({ percentages }: any) {
-  const COLORS = ['#FF5733', '#33FF57', '#5733FF'];
-
+function RecipeMacrosChart({ percentages }: any) {
   const data = [
     { name: 'Protein', value: percentages?.protein },
     { name: 'Fat', value: percentages?.fat },

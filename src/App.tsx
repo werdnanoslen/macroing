@@ -13,6 +13,7 @@ export type PercentagesType = {
 };
 
 export type DataRow = {
+  id: number;
   food: string;
   servingsize: number;
   protein: number;
@@ -107,7 +108,17 @@ function App() {
       );
       const data = await response.json();
       if (data) {
-        return data.foodPortions[0].gramWeight;
+        const portions = data.foodPortions;
+        if (portions.length > 0) {
+          return portions[0].gramWeight;
+        } else {
+          let talliedWeight = 0;
+          for (let i = 0; i < data.inputFoods.length; i++) {
+            const inputFood = data.inputFoods[i];
+            talliedWeight += inputFood.ingredientWeight;
+          }
+          return talliedWeight;
+        }
       }
     } catch (error) {
       console.error('Error fetching data from the API:', error);
@@ -142,6 +153,7 @@ function App() {
 
   const handleSearchResultClick = async (foodItem: any) => {
     let newFood: DataRow = {
+      id: 0,
       food: '',
       servingsize: 0,
       protein: 0,
@@ -149,6 +161,7 @@ function App() {
       carb: 0,
       fiber: 0,
     };
+    newFood.id = foodItem.fdcId;
     newFood.food = foodItem.description.toLowerCase();
     newFood.servingsize =
       Number(foodItem.servingSize) || (await searchFoodDetails(foodItem.fdcId));
@@ -159,7 +172,7 @@ function App() {
     ) {
       const nutrient = foodItem.foodNutrients[i];
       const name = nutrient.nutrientName;
-      const value = Number(nutrient.value) || 0;
+      const value = (Number(nutrient.value) * newFood.servingsize) / 100; //api returns nutrients per 100g regardless of servingsize
       switch (name) {
         case 'Protein':
           newFood.protein = value;
@@ -187,6 +200,7 @@ function App() {
 
   useEffect(() => {
     if (selectedRecipe) recalculatePercentages();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedRecipe]);
 
   return (

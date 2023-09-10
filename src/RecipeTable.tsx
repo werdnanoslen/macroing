@@ -24,10 +24,17 @@ function RecipeTable({
         <tbody>
           {selectedRecipe.map((item: DataRow, index: number) => (
             <tr key={index}>
-              <td>{item.food}</td>
+              <td>
+                <a
+                  href={`https://fdc.nal.usda.gov/fdc-app.html#/food-details/${item.id}/nutrients`}
+                >
+                  {item.food}
+                </a>
+              </td>
               <td>
                 <input
                   type="number"
+                  min="0"
                   value={item.servingsize}
                   onChange={(e) =>
                     onUpdateServingSize(index, Number(e.target.value))

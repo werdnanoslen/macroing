@@ -10,22 +10,13 @@ function RecipeMacrosChart({ percentages }: any) {
   ];
 
   return (
-    <div>
-      <h2>Recipe Macros</h2>
-      <PieChart width={400} height={300}>
-        <Pie
-          dataKey="value"
-          data={data}
-          cx={200}
-          cy={150}
-          outerRadius={100}
-          fill="#8884d8"
-        >
+    <div id="recipe-chart">
+      <PieChart width={300} height={300}>
+        <Pie dataKey="value" data={data} cx={150} cy={150} fill="#8884d8">
           {data.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index]} />
           ))}
         </Pie>
-        <Tooltip />
         <Legend />
       </PieChart>
     </div>

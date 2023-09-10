@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { BarChart, Bar, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
 import RecipeTable from './RecipeTable';
 import RecipeMacrosChart from './RecipeMacrosChart';
+import ThresholdBarChart from './ThresholdBarChart';
 import './App.css';
 
 export type PercentagesType = {
@@ -25,8 +26,20 @@ export const COLORS = ['#FF5733', '#33FF57', '#5733FF'];
 
 function App() {
   const [selectedRecipe, setSelectedRecipe] = useState<DataRow[]>([]);
-  const [totals, setTotals] = useState<PercentagesType>();
-  const [percentages, setPercentages] = useState<PercentagesType>();
+  const [totals, setTotals] = useState<PercentagesType>({
+    servingsize: 0,
+    protein: 0,
+    fat: 0,
+    carb: 0,
+    fiber: 0,
+  });
+  const [percentages, setPercentages] = useState<PercentagesType>({
+    servingsize: 0,
+    protein: 0,
+    fat: 0,
+    carb: 0,
+    fiber: 0,
+  });
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const macroTargetsData = [
@@ -34,7 +47,12 @@ function App() {
     { name: 'Fat', value: 10 },
     { name: 'Carb', value: 60 },
   ];
-  const fiberData = [{ name: 'Fiber', value: 30 }];
+  const thresholds = {
+    protein: 100,
+    fat: 100,
+    carb: 100,
+    fiber: 100,
+  };
   let searchTimeout: any;
 
   const handleRemoveItem = (index: number) => {
@@ -223,18 +241,15 @@ function App() {
               />
             ))}
           </Pie>
-          <Tooltip />
           <Legend />
         </PieChart>
-        {/* 
-        <h2>Fiber</h2>
-        <BarChart width={400} height={300} data={fiberData}>
-          <Bar dataKey="value" fill="#8884d8" />
-          <Tooltip />
-        </BarChart> */}
       </div>
       <div id="recipe">
-        <RecipeMacrosChart percentages={percentages} />
+        <div>
+          <h2>Recipe Macros</h2>
+          <RecipeMacrosChart percentages={percentages} />
+          <ThresholdBarChart totals={totals} thresholds={thresholds} />
+        </div>
 
         <h2>Recipe</h2>
 

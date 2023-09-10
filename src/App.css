@@ -46,5 +46,17 @@
   width: 40%;
 }
 #recipe {
-  /* width: 40%; */
+  width: 60%;
+}
+.search-results {
+  max-height: 10rem;
+  overflow: scroll;
+}
+.search-result:hover {
+  background: lightblue;
+  cursor: pointer;
+}
+.search-result,
+td:first-of-type {
+  text-transform: capitalize;
 }

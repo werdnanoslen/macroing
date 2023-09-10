@@ -14,11 +14,11 @@ function RecipeTable({
         <thead>
           <tr>
             <th>Food</th>
-            <th>Serving Size</th>
-            <th>Protein</th>
-            <th>Fat</th>
-            <th>Carb</th>
-            <th>Fiber</th>
+            <th>Serving Size (g)</th>
+            <th>Protein (g)</th>
+            <th>Fat (g)</th>
+            <th>Carb (g)</th>
+            <th>Fiber (g)</th>
           </tr>
         </thead>
         <tbody>
@@ -34,22 +34,30 @@ function RecipeTable({
                   }
                 />
               </td>
-              <td>{item.protein.toFixed(2)}</td>
-              <td>{item.fat.toFixed(2)}</td>
-              <td>{item.carb.toFixed(2)}</td>
-              <td>{item.fiber.toFixed(2)}</td>
+              <td>{item.protein.toFixed(1)}</td>
+              <td>{item.fat.toFixed(1)}</td>
+              <td>{item.carb.toFixed(1)}</td>
+              <td>{item.fiber.toFixed(1)}</td>
               <td>
                 <button onClick={() => onRemove(index)}>Remove</button>
               </td>
             </tr>
           ))}
           <tr>
+            <td>Totals</td>
+            <td>{totals?.servingsize.toFixed(1)}</td>
+            <td>{totals?.protein.toFixed(1)}</td>
+            <td>{totals?.fat.toFixed(1)}</td>
+            <td>{totals?.carb.toFixed(1)}</td>
+            <td>{totals?.fiber.toFixed(1)}</td>
+          </tr>
+          <tr>
             <td>Percentages</td>
             <td>100%</td>
-            <td>{percentages?.protein.toFixed(2)}%</td>
-            <td>{percentages?.fat.toFixed(2)}%</td>
-            <td>{percentages?.carb.toFixed(2)}%</td>
-            <td>{percentages?.fiber.toFixed(2)}%</td>
+            <td>{percentages?.protein.toFixed(1)}%</td>
+            <td>{percentages?.fat.toFixed(1)}%</td>
+            <td>{percentages?.carb.toFixed(1)}%</td>
+            <td>{percentages?.fiber.toFixed(1)}%</td>
           </tr>
         </tbody>
       </table>

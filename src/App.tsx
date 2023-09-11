@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { PieChart, Pie, Cell, Tooltip, Legend } from 'recharts';
+import { PieChart, Pie, Cell, Legend } from 'recharts';
 import RecipeTable from './RecipeTable';
 import RecipeMacrosChart from './RecipeMacrosChart';
 import ThresholdBarChart from './ThresholdBarChart';
@@ -49,7 +49,7 @@ function App() {
   ];
   const thresholds = {
     protein: 113,
-    fat:35,
+    fat: 35,
     carb: 192,
     fiber: 26,
   };

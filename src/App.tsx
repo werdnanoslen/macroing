@@ -48,10 +48,10 @@ function App() {
     { name: 'Carb', value: 60 },
   ];
   const thresholds = {
-    protein: 100,
-    fat: 100,
-    carb: 100,
-    fiber: 100,
+    protein: 113,
+    fat:35,
+    carb: 192,
+    fiber: 26,
   };
   let searchTimeout: any;
 
